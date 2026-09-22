@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260922-001",
+  "status": "claimed",
+  "claimed_at": "2026-09-22T23:55:00+07:00",
+  "agent": "antigravity",
+  "message": "Claimed task RADAR-20260922-001 on agent-control"
+}
