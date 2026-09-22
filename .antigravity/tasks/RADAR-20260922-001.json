@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260922-001",
+  "created_at": "2026-09-22T23:20:00+07:00",
+  "target_agent": "antigravity",
+  "status": "pending",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "control_branch": "agent-control",
+    "upstream_repository": "alibaba-damo-academy/damo-radar",
+    "upstream_base_sha": "0dbf0ece209b77d722588e5e7943014d3db48f7f",
+    "working_branch": "antigravity/radar-20260922-001"
+  },
+  "execution": {
+    "mode": "bootstrap_and_code_change",
+    "requires_user_approval": false,
+    "allow_one_time_main_bootstrap_replace": true,
+    "instructions": [
+      "Read ANTIGRAVITY_BRIDGE.md, ANTIGRAVITY_BOOTSTRAP.md and docs/IMPLEMENTATION_PLAN.md from origin/agent-control before doing anything.",
+      "Do not use nghoang1288/Prima for any RADAR task, code, receipt, result, artifact or bridge operation.",
+      "Verify exact upstream commit 0dbf0ece209b77d722588e5e7943014d3db48f7f exists in alibaba-damo-academy/damo-radar.",
+      "Clone/fetch the upstream repository and preserve upstream history, LICENSE, THIRD_PARTY_LICENSES.md and attribution.",
+      "Using the bridge bootstrap exception, replace the temporary RADAR-4060 main README baseline exactly once with upstream commit 0dbf0ece209b77d722588e5e7943014d3db48f7f. Record the before/after SHAs in the terminal result.",
+      "After the one-time bootstrap replacement, never force-push main again.",
+      "Create antigravity/radar-20260922-001 from the exact imported main baseline.",
+      "Copy docs/IMPLEMENTATION_PLAN.md from agent-control into the implementation branch.",
+      "Implement an RTX 4060 8GB inference path while preserving the upstream default ROI (96, 256, 384), preprocessing, class order and output semantics.",
+      "Keep the full CT and full-volume stitching tensors on CPU; move only the active sliding-window patch to CUDA.",
+      "Use torch.inference_mode(), optional FP16 autocast, immediate patch-output transfer back to CPU, and a single-channel overlap count map.",
+      "Do not quantize weights or reduce ROI in the reference 4060 path.",
+      "Create minimal inference dependencies and WSL helper scripts.",
+      "Use only the upstream public demo case for end-to-end testing; do not access local patient data.",
+      "Profile baseline and optimized paths with peak allocated/reserved CUDA memory and wall-clock time.",
+      "Add synthetic tests for stitching equivalence, count-map broadcasting, AMP-off behavior and CUDA-residency invariants.",
+      "Write docs/BENCHMARK.md with exact runtime versions, peak VRAM, runtime and numerical comparison.",
+      "If the optimized demo still OOMs, do not hide the failure and do not silently reduce ROI; measure and document the exact blocker.",
+      "Push only code, docs, scripts, synthetic tests and aggregate benchmark metrics. Do not push checkpoints or generated clinical outputs.",
+      "Open a PR from antigravity/radar-20260922-001 to main. Do not merge it.",
+      "Write the terminal result to .antigravity/results/RADAR-20260922-001.json on agent-control."
+    ]
+  },
+  "safety": {
+    "allow_public_demo_data": true,
+    "allow_patient_data_read_local": false,
+    "allow_patient_derived_output_on_github": false,
+    "allow_external_upload_of_patient_data": false,
+    "allow_destructive_workspace_ops": false,
+    "allow_merge": false,
+    "allow_force_push_main": "bootstrap_exact_sha_once_only"
+  },
+  "acceptance": [
+    "main is replaced exactly once with upstream SHA 0dbf0ece209b77d722588e5e7943014d3db48f7f before implementation changes",
+    "agent-control remains separate and contains the RADAR-only task/result protocol",
+    "working branch antigravity/radar-20260922-001 exists",
+    "optimized inference preserves the upstream default ROI",
+    "full-volume stitching remains CPU-resident in 4060 mode",
+    "synthetic memory/stitching tests pass",
+    "upstream public demo completes on RTX 4060 8GB without CUDA OOM OR the result documents a precise measured blocker",
+    "docs/BENCHMARK.md records exact environment, peak VRAM, runtime and numerical comparison",
+    "no patient-derived files or checkpoints are committed",
+    "a PR is opened to main but not merged",
+    "terminal result is pushed to .antigravity/results/RADAR-20260922-001.json on agent-control"
+  ],
+  "result_path": ".antigravity/results/RADAR-20260922-001.json"
+}
