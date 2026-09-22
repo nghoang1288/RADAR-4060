@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260922-001",
+  "status": "success",
+  "completed_at": "2026-09-23T00:13:00+07:00",
+  "target_agent": "antigravity",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "upstream_repository": "alibaba-damo-academy/damo-radar",
+    "upstream_base_sha": "0dbf0ece209b77d722588e5e7943014d3db48f7f",
+    "main_bootstrap_before_sha": "db37f987cfdb25598b16f7687fdaaf6ca018ceb2",
+    "main_bootstrap_after_sha": "0dbf0ece209b77d722588e5e7943014d3db48f7f",
+    "working_branch": "antigravity/radar-20260922-001",
+    "commit_sha": "f1637cb71ec7a216db8a15998f86f8a84617dd94",
+    "pr_url": "https://github.com/nghoang1288/RADAR-4060/pull/1",
+    "pr_merged": false
+  },
+  "runtime_environment": {
+    "host_os": "Windows 11",
+    "runtime_os": "WSL2 Ubuntu 26.04.1 LTS",
+    "gpu": "NVIDIA GeForce RTX 4060 (8188 MiB VRAM)",
+    "driver_version": "610.88 (WSL UMD 610.57.01)",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "torchvision": "0.21.0+cu124",
+    "cuda": "12.4",
+    "monai": "1.5.2",
+    "simpleitk": "2.5.6",
+    "transformers": "4.30.2",
+    "nibabel": "5.4.2"
+  },
+  "metrics": {
+    "evaluation_case": "data/demo_cases/AC423ccbe.nii.gz",
+    "roi_size": [96, 256, 384],
+    "baseline": {
+      "peak_cuda_allocated_mb": 11644.71,
+      "peak_cuda_reserved_mb": 16854.00,
+      "wall_clock_seconds": 45.31,
+      "note": "Exceeds 8GB physical VRAM ceiling; causes OOM on bare Linux or massive page-faulting into system RAM under WDDM."
+    },
+    "optimized_fp16": {
+      "peak_cuda_allocated_mb": 5017.56,
+      "peak_cuda_reserved_mb": 7324.00,
+      "peak_host_ram_mb": 5764.25,
+      "wall_clock_seconds": 12.08,
+      "vram_gate_passed": true,
+      "target_ceiling_mb": 7680.0,
+      "speedup_vs_baseline": "3.75x"
+    },
+    "optimized_fp32": {
+      "peak_cuda_allocated_mb": 6272.11,
+      "peak_cuda_reserved_mb": 10182.00,
+      "wall_clock_seconds": 16.61
+    },
+    "numerical_comparison": {
+      "total_items_compared": 146,
+      "fp32_vs_baseline": {
+        "mean_absolute_difference": 0.0,
+        "max_absolute_difference": 0.0,
+        "exact_bit_identity": true
+      },
+      "fp16_vs_baseline": {
+        "mean_absolute_difference": 0.0002551232,
+        "max_absolute_difference": 0.006662466,
+        "worst_label": "食管_裂孔疝 (Esophagus_Hiatal hernia)",
+        "max_score_delta_passed": true,
+        "threshold": 0.02
+      }
+    }
+  },
+  "acceptance": {
+    "main_replaced_exact_sha": true,
+    "agent_control_isolated": true,
+    "working_branch_created": true,
+    "upstream_roi_preserved": true,
+    "full_volume_stitching_cpu_resident": true,
+    "synthetic_tests_passed": true,
+    "public_demo_completed_without_oom": true,
+    "benchmark_docs_created": true,
+    "no_phi_or_checkpoints_committed": true,
+    "pr_opened_and_not_merged": true,
+    "terminal_result_pushed": true
+  },
+  "tests": {
+    "test_suite": "tests/test_inference_4060.py",
+    "passed": 6,
+    "failed": 0,
+    "test_names": [
+      "test_single_channel_count_map_broadcasting",
+      "test_cpu_stitching_equivalence",
+      "test_patch_order_invariance",
+      "test_amp_can_be_disabled",
+      "test_cuda_residency_invariants",
+      "test_no_patient_data_used"
+    ]
+  },
+  "artifacts_created": [
+    "RADAR_inference/inference_4060.py",
+    "requirements-inference.txt",
+    "scripts/setup_wsl.sh",
+    "scripts/download_models.sh",
+    "scripts/run_demo_4060.sh",
+    "scripts/profile_demo_4060.sh",
+    "tests/test_inference_4060.py",
+    "docs/BENCHMARK.md",
+    "docs/IMPLEMENTATION_PLAN.md"
+  ]
+}
