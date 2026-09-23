@@ -14,4 +14,5 @@ merlin_report.json
 .cache
 ckpt/.cache
 results/*.csv
+results/*.html
 RADAR_inference/demo_cases/
