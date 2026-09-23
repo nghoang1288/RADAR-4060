@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260923-004",
+  "created_at": "2026-09-23T22:15:00+07:00",
+  "target_agent": "antigravity",
+  "status": "pending",
+  "depends_on": "RADAR-20260923-003",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "control_branch": "agent-control",
+    "base_branch": "antigravity/radar-20260923-003",
+    "base_sha": "f5a967c89a7e8a222abf11e37ab9a4ca796d300a",
+    "working_branch": "antigravity/radar-20260923-004"
+  },
+  "execution": {
+    "mode": "clinical_logic_audit_and_correction",
+    "requires_user_approval": false,
+    "local_aliases_only": true,
+    "instructions": [
+      "Read docs/CLINICAL_AUDIT_V3.md completely before execution.",
+      "Verify base SHA f5a967c89a7e8a222abf11e37ab9a4ca796d300a and create antigravity/radar-20260923-004.",
+      "Do not use Prima.",
+      "Remove four-phase score fusion from the primary RADAR interpretation path.",
+      "Choose one primary suitable contrast-enhanced portal-venous/venous phase for RADAR inference when available.",
+      "Other phases may be shown only as supplementary review images or explicitly experimental inference and must not change the primary RADAR score.",
+      "Remove forced Top-12 abnormality selection.",
+      "Default candidate list must use score >= 0.5 only as a positive-vs-negative prompt preference boundary, with a prominent warning that it is not a validated clinical diagnostic threshold.",
+      "Do not insert any unreviewed candidate into the formal KỸ THUẬT/MÔ TẢ/KẾT LUẬN layer. Formal report content should be generated from radiologist-accepted candidates plus manual notes.",
+      "Remove fixed ORGAN_ANATOMICAL_Z_RATIO evidence for finding-specific images.",
+      "Instrument inference_4060.py to capture per-window finding-score provenance and relevant organ segmentation metadata with minimal memory overhead.",
+      "For each candidate, select the exact highest-scoring contributing window and representative slice based on organ-mask area within that window.",
+      "If spatial provenance is unavailable, explicitly state no reliable spatial evidence instead of showing an arbitrary organ slice.",
+      "Canonicalize NIfTI orientation using affine/direction before rendering and use literal R/L markers. Add synthetic orientation-flip tests.",
+      "Use physical coordinates derived from image geometry rather than estimated slice position.",
+      "Separate primary model evidence from supplementary clinically useful phase images.",
+      "Add a RADAR-146 coverage matrix and prohibit unsupported normal statements for structures not represented by RADAR.",
+      "Preserve the user's conventional Vietnamese report structure as a formatting template only, not as automatic normal ground truth.",
+      "Run all synthetic/public demo tests.",
+      "Then re-run LOCAL_CASE_001 locally from the existing local alias using the corrected V3 workflow.",
+      "Produce one local V3 HTML and a local-only audit table. Do not upload patient findings, scores, images, DICOM, NIfTI, HTML, or audit table to GitHub.",
+      "GitHub terminal result may contain only aggregate non-PHI facts: primary phase class, candidate count, evidence provenance success count, orientation tests, runtime, peak VRAM, and pass/fail.",
+      "Open a new PR but do not merge."
+    ]
+  },
+  "safety": {
+    "allow_public_demo_data": true,
+    "allow_patient_data_read_local": true,
+    "allow_patient_derived_output_on_github": false,
+    "allow_external_upload_of_patient_data": false,
+    "allow_merge": false,
+    "allow_force_push_code": false
+  },
+  "acceptance": [
+    "No four-phase score fusion is used for primary interpretation",
+    "A single suitable venous/portal-venous primary phase is selected when available",
+    "No forced Top-N candidate list remains",
+    "0.5 is labeled only as a model prompt-preference boundary, not a clinical cutoff",
+    "Unreviewed candidates do not auto-populate final clinical conclusion",
+    "Finding evidence comes from the actual highest-scoring contributing window",
+    "Fixed anatomical Z-ratio evidence is removed",
+    "Missing spatial provenance never produces fabricated evidence",
+    "R/L orientation is derived from canonicalized image geometry",
+    "Physical position is derived from affine/direction",
+    "Coverage matrix blocks unsupported normal statements",
+    "Public demo and synthetic tests pass",
+    "LOCAL_CASE_001 is re-run locally using V3 and produces one combined report",
+    "No patient-derived content is pushed to GitHub",
+    "A terminal result is pushed to .antigravity/results/RADAR-20260923-004.json"
+  ],
+  "result_path": ".antigravity/results/RADAR-20260923-004.json"
+}
