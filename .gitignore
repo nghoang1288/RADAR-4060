@@ -11,3 +11,8 @@ bert-base-uncased
 merlin_labels.json
 merlin_report.json
 .vscode
+.cache
+ckpt/.cache
+results/*.csv
+results/*.html
+RADAR_inference/demo_cases/
