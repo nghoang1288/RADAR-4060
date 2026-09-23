@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260923-004",
+  "status": "success",
+  "completed_at": "2026-09-23T22:24:00+07:00",
+  "target_agent": "antigravity",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "base_sha": "f5a967c89a7e8a222abf11e37ab9a4ca796d300a",
+    "working_branch": "antigravity/radar-20260923-004",
+    "commit_sha": "48831139178ad3a6549a174c865fbc1379c6d482",
+    "pr_url": "https://github.com/nghoang1288/RADAR-4060/pull/4",
+    "pr_merged": false
+  },
+  "clinical_audit_v3": {
+    "single_primary_phase_enforced": true,
+    "primary_phase_selected": "PORTAL_VENOUS / VENOUS",
+    "score_fusion_removed": true,
+    "forced_top_n_removed": true,
+    "candidate_filter_rule": "model_score >= 0.5 (model prompt boundary, non-calibrated)",
+    "two_layer_architecture_enforced": true,
+    "unreviewed_candidates_excluded_from_formal_conclusion": true,
+    "coverage_matrix_enforced": true,
+    "unsupported_normal_claims_prohibited": true
+  },
+  "canonical_imaging": {
+    "orientation_canonicalization": "RAS+ via nibabel.as_closest_canonical",
+    "orientation_markers": "Literal R (Patient Right) and L (Patient Left)",
+    "physical_coordinates": "Derived from image affine matrix (mm)",
+    "synthetic_affine_flip_tests": "Passed"
+  },
+  "local_study_retest": {
+    "case_alias": "LOCAL_CASE_001",
+    "primary_phase_alias": "LOCAL_CASE_001_PHASE_VENOUS",
+    "primary_phase_slices": 397,
+    "supplementary_phases_detected": [
+      "UNENHANCED",
+      "ARTERIAL",
+      "DELAYED"
+    ],
+    "candidate_count_ge_0_5": 18,
+    "evidence_provenance_success_count": 18,
+    "local_primary_html": "results/LOCAL_CASE_001_RADAR_V3.html",
+    "local_audit_table": "results/LOCAL_CASE_001_audit_v3.csv",
+    "phi_safety": "Strictly local: Zero patient names, DICOM headers, pixel data, audit rows, or scores committed to GitHub."
+  },
+  "tests": {
+    "test_suite": "tests/test_clinical_audit_v3.py",
+    "tests_passed": 8,
+    "total_repo_tests_passed": 27,
+    "failures": 0
+  },
+  "acceptance": {
+    "base_sha_verified": true,
+    "working_branch_created": true,
+    "no_score_fusion": true,
+    "single_primary_phase": true,
+    "no_forced_top_n": true,
+    "two_layer_state": true,
+    "canonical_orientation": true,
+    "coverage_matrix_present": true,
+    "local_audit_csv_created": true,
+    "no_phi_pushed": true,
+    "pr_opened_and_not_merged": true,
+    "terminal_result_pushed": true
+  }
+}
