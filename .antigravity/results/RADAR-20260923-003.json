@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260923-003",
+  "status": "success",
+  "completed_at": "2026-09-23T22:08:00+07:00",
+  "target_agent": "antigravity",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "base_sha": "8d87759a6cf39858a2e84f5a7e0e2da992dcc83f",
+    "working_branch": "antigravity/radar-20260923-003",
+    "commit_sha": "f5a967c89a7e8a222abf11e37ab9a4ca796d300a",
+    "pr_url": "https://github.com/nghoang1288/RADAR-4060/pull/3",
+    "pr_merged": false
+  },
+  "study_fusion": {
+    "architecture": "StudyCase multi-phase clinical fusion",
+    "phases_detected": 4,
+    "phase_list": [
+      "UNENHANCED",
+      "ARTERIAL",
+      "VENOUS",
+      "DELAYED"
+    ],
+    "total_study_level_findings": 146,
+    "deduplication_ratio": "4:1",
+    "score_selection_policy": "finding and organ clinical phase preferences",
+    "unsupported_normal_claims_suppressed": true
+  },
+  "evidence_generation": {
+    "total_evidence_panels": 12,
+    "window_presets_used": [
+      "SOFT_TISSUE",
+      "BONE",
+      "LUNG",
+      "CALCIFICATION"
+    ],
+    "orientation_markers": "P/T burned with safe slice and phase metadata",
+    "phi_safety": "Zero patient names, MRN, accession numbers, or raw DICOM headers burned into images",
+    "storage": "Self-contained base64 JPEG embedded within local HTML"
+  },
+  "local_study_validation": {
+    "case_alias": "LOCAL_CASE_001",
+    "primary_report_count": 1,
+    "local_report_alias": "results/LOCAL_CASE_001_unified_report.html",
+    "execution_time_seconds": 112.98,
+    "peak_cuda_reserved_mb": 7848.00,
+    "peak_cuda_allocated_mb": 5530.56,
+    "vram_ceiling_met": true,
+    "phi_prevention": "Strictly local: All patient DICOM, NIfTI, CSV, evidence images, and HTML stored outside Git."
+  },
+  "tests": {
+    "test_suite": "tests/test_multiphase_report.py",
+    "tests_passed": 7,
+    "total_repo_tests_passed": 19,
+    "failures": 0
+  },
+  "acceptance": {
+    "base_sha_verified": true,
+    "working_branch_created": true,
+    "four_phases_fused_into_one_study": true,
+    "duplicate_findings_deduplicated": true,
+    "phase_preference_selection_enforced": true,
+    "conventional_vietnamese_structure": true,
+    "no_unsupported_normal_statements": true,
+    "every_prioritized_finding_has_evidence": true,
+    "offline_radiologist_controls_functional": true,
+    "zero_patient_data_on_github": true,
+    "pr_opened_and_not_merged": true,
+    "terminal_result_pushed": true
+  }
+}
