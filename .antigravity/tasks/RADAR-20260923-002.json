@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260923-002",
+  "created_at": "2026-09-23T18:10:00+07:00",
+  "target_agent": "antigravity",
+  "status": "pending",
+  "depends_on": "RADAR-20260922-001",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "control_branch": "agent-control",
+    "base_branch": "antigravity/radar-20260922-001",
+    "base_sha": "f1637cbdb840e77fd2d7d2d24fda84b33060a84f",
+    "working_branch": "antigravity/radar-20260923-002"
+  },
+  "execution": {
+    "mode": "code_change_then_local_case_validation",
+    "requires_user_approval": false,
+    "local_aliases_only": true,
+    "instructions": [
+      "Read ANTIGRAVITY_BRIDGE.md and docs/RADIOLOGIST_REPORT_SPEC.md from origin/agent-control before execution.",
+      "Verify code.base_sha exactly. Create antigravity/radar-20260923-002 from f1637cbdb840e77fd2d7d2d24fda84b33060a84f.",
+      "Do not use Prima for any part of this task.",
+      "GATE A: implement a fully offline radiologist-readable HTML report from RADAR CSV/model output.",
+      "Create a maintainable Vietnamese organ/finding terminology mapping for all 146 findings, preserving the English label as secondary metadata.",
+      "Default HTML must show Top 12 findings overall ranked by model score, grouped by organ, with up to Top 3 per organ and a collapsible full 146-finding table.",
+      "Use the wording 'Điểm mô hình'. Explicitly state it is not a calibrated disease probability.",
+      "Do not label findings positive/negative and do not impose a universal clinical cutoff such as 0.5.",
+      "Add safe offline search/filter/toggle controls without CDN or network calls.",
+      "Ensure HTML escapes all input text and uses safe relative/local links only.",
+      "Add regression tests for score sorting, Vietnamese label mapping coverage, HTML escaping, no external network assets, and demo-case expected ranking.",
+      "Render the upstream public demo and verify high-ranked entries match the reference ordering, including cardiomegaly, aortic calcification, and atherosclerosis near their known scores.",
+      "Only after Gate A tests and demo rendering pass, proceed to GATE B.",
+      "GATE B: process local alias LOCAL_CASE_001 only if it exists in local Antigravity configuration. The real filesystem path must never be committed or written into GitHub results.",
+      "Extract the ZIP to a local-only runtime directory. Inventory DICOM series locally without logging patient-identifying fields to GitHub.",
+      "Select eligible diagnostic abdominal contrast-enhanced CT series according to docs/RADIOLOGIST_REPORT_SPEC.md. Exclude scouts/localizers/dose reports/derived screenshots.",
+      "If multiple eligible contrast phases exist, process them separately rather than silently selecting one or averaging across phases.",
+      "Convert eligible DICOM series locally to NIfTI using dcm2niix or equivalent. Use safe neutral filenames such as LOCAL_CASE_001_SERIES_01.nii.gz.",
+      "Run the optimized RTX 4060 inference path with default ROI and FP16 for each eligible series.",
+      "Render a local RADAR_report.html for each processed series or a single multi-series HTML with clearly separated series sections.",
+      "Keep all extracted DICOM, converted NIfTI, CSV, HTML and screenshots outside the Git repository and Git-ignored.",
+      "GitHub terminal result must contain only aggregate non-PHI operational data: number of candidate/eligible/processed series, success/failure, runtime, peak VRAM, and a sanitized local output alias. Do not include patient name, original ZIP path, SeriesDescription strings containing PHI, raw findings, or model scores from the real patient.",
+      "If LOCAL_CASE_001 is not configured locally, finish Gate A, mark Gate B blocked with a concise instruction to configure the alias locally, and do not fabricate a patient test.",
+      "Push code/tests/docs to the working branch and open a PR to main. Do not merge."
+    ]
+  },
+  "safety": {
+    "allow_public_demo_data": true,
+    "allow_patient_data_read_local": true,
+    "allow_patient_derived_output_on_github": false,
+    "allow_external_upload_of_patient_data": false,
+    "allow_destructive_workspace_ops": false,
+    "allow_merge": false,
+    "allow_force_push_code": false
+  },
+  "acceptance": [
+    "Base SHA equals f1637cbdb840e77fd2d7d2d24fda84b33060a84f",
+    "A new working branch antigravity/radar-20260923-002 exists",
+    "HTML report is fully offline and clinically readable",
+    "All 146 findings have Vietnamese labels or an explicit tested fallback with no Chinese-only display in the main UI",
+    "The UI uses model score terminology and contains a visible not-calibrated-probability warning",
+    "No universal positive/negative threshold is applied",
+    "Demo regression tests pass and high-ranked findings match the reference CSV ordering",
+    "LOCAL_CASE_001 is processed only after Gate A passes and only from a local alias",
+    "Multiple eligible contrast phases, if present, are handled separately",
+    "No PHI, patient files, patient scores, or patient report content are pushed to GitHub",
+    "A PR is opened but not merged",
+    "A terminal result is pushed to .antigravity/results/RADAR-20260923-002.json"
+  ],
+  "result_path": ".antigravity/results/RADAR-20260923-002.json"
+}
