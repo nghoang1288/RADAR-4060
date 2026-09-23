@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task_id": "RADAR-20260923-002",
+  "status": "success",
+  "completed_at": "2026-09-23T18:28:30+07:00",
+  "target_agent": "antigravity",
+  "code": {
+    "repository": "nghoang1288/RADAR-4060",
+    "base_sha": "f1637cbdb840e77fd2d7d2d24fda84b33060a84f",
+    "working_branch": "antigravity/radar-20260923-002",
+    "commit_sha": "8d87759a6cf39858a2e84f5a7e0e2da992dcc83f",
+    "pr_url": "https://github.com/nghoang1288/RADAR-4060/pull/2",
+    "pr_merged": false
+  },
+  "gate_a": {
+    "status": "passed",
+    "description": "Offline Radiologist-Readable HTML Report Generator with Vietnamese Medical Terminology",
+    "terminology_coverage": {
+      "total_findings": 146,
+      "mapped_findings": 146,
+      "missing_findings": 0,
+      "unique_organs": 18,
+      "all_organs_mapped": true
+    },
+    "clinical_display": {
+      "metric_label": "Điểm mô hình",
+      "calibrated_probability_claimed": false,
+      "universal_cutoff_applied": false,
+      "disclaimer_present": true,
+      "disclaimer_text": "Điểm mô hình phản ánh mức độ phù hợp giữa hình ảnh và finding mà RADAR học được; đây không phải xác suất bệnh đã được hiệu chỉnh.",
+      "review_labels": [
+        "Ưu tiên rà lại",
+        "Các finding khác"
+      ]
+    },
+    "offline_verification": {
+      "external_cdns": 0,
+      "external_scripts": 0,
+      "external_fonts": 0,
+      "html_escaping_verified": true,
+      "local_controls": "pure JavaScript search/filter and organ select"
+    },
+    "demo_verification": {
+      "case_id": "AC423ccbe",
+      "html_rendered": true,
+      "local_report_alias": "results/demo_radiologist_report.html",
+      "expected_rankings": [
+        {
+          "rank": 1,
+          "finding_vi": "Bóng tim to / Tim to",
+          "finding_en": "Cardiomegaly",
+          "organ_vi": "Tim & Màng ngoài tim",
+          "model_score": 0.833,
+          "reference_approx": 0.833,
+          "delta": 0.0005
+        },
+        {
+          "rank": 2,
+          "finding_vi": "Vôi hóa động mạch chủ",
+          "finding_en": "Calcification",
+          "organ_vi": "Động mạch chủ",
+          "model_score": 0.698,
+          "reference_approx": 0.697,
+          "delta": 0.0006
+        },
+        {
+          "rank": 3,
+          "finding_vi": "Xơ vữa động mạch chủ",
+          "finding_en": "Atherosclerosis",
+          "organ_vi": "Động mạch chủ",
+          "model_score": 0.578,
+          "reference_approx": 0.578,
+          "delta": 0.0004
+        }
+      ]
+    },
+    "tests": {
+      "test_suite": "tests/test_radiologist_report.py",
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "gate_b": {
+    "status": "blocked",
+    "reason": "LOCAL_CASE_001 is not configured in local environment or configuration.",
+    "instructions_to_enable": "To run Gate B against real patient DICOM, export the local filesystem path to environment variable `LOCAL_CASE_001=/path/to/patient.zip` or set in local Antigravity config outside Git. Then run the multi-series extractor and inference pipeline. No fabricated patient data was processed, preserving strict clinical safety and patient privacy.",
+    "candidate_series": 0,
+    "eligible_series": 0,
+    "processed_series": 0,
+    "phi_safety": "Verified: No patient names, DICOM headers, pixel data, or patient scores committed."
+  },
+  "acceptance": {
+    "base_sha_verified": true,
+    "working_branch_created": true,
+    "html_report_offline_and_readable": true,
+    "vietnamese_mapping_146_findings": true,
+    "model_score_terminology_enforced": true,
+    "uncalibrated_probability_warning_visible": true,
+    "no_universal_positive_negative_cutoff": true,
+    "demo_regression_tests_passed": true,
+    "gate_b_safely_blocked_no_fabrication": true,
+    "no_phi_pushed": true,
+    "pr_opened_and_not_merged": true,
+    "terminal_result_pushed": true
+  }
+}
